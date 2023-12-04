@@ -1,23 +1,19 @@
-import {
-  getBlockNumberService
-} from './services'
-import { useEffect, useState } from 'react';
+import { ExplorerProvider } from './explorerContext';
+import { BlockWithTransactions } from './components'
 
 import './App.css';
 
 
 function App() {
-  const [blockNumber, setBlockNumber] = useState();
 
-  useEffect(() => {
-    async function getBlockNumber() {
-      setBlockNumber(await getBlockNumberService());
-    }
 
-    getBlockNumber();
-  });
-
-  return <div className="App">Block Number: {blockNumber}</div>;
+  return (
+    <ExplorerProvider>
+      <div className="App">
+        <BlockWithTransactions></BlockWithTransactions>
+      </div>
+    </ExplorerProvider>
+  );
 }
 
 export default App;
