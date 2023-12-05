@@ -1,33 +1,43 @@
 import React, { useEffect, createContext, useState } from 'react';
 import {
     getBlockNumberService,
-    getBlockWithTransactionsService
+    getBlockWithTransactionsService,
+    getTransactionReceiptsService,
   } from './services';
 
 const ExplorerContext = createContext();
 
 const ExplorerProvider = ({ children }) => {
   const [blockNumber, setBlockNumber] = useState('');
-  const [block, setBlock] = useState('');
+  const [blockWithTransactions, setBlockWithTransactions] = useState('');
+  const [transactionReceipts, setTransactionReceipts] = useState('');
 
   useEffect(() => {
     async function getBlockNumber() {
       setBlockNumber(await getBlockNumberService());
-    }
+    };
 
     getBlockNumber();
 
     async function getBlockWithTransaction() {
-      setBlock(await getBlockWithTransactionsService('latest'));
-    }
+      setBlockWithTransactions(await getBlockWithTransactionsService('latest'));
+    };
 
     getBlockWithTransaction();
+
+    async function getTransactionReceipts() {
+      setTransactionReceipts(await getTransactionReceiptsService({ blockHash: blockWithTransactions.hash }));
+    };
+
+    getTransactionReceipts();
+
   });
 
   return (
     <ExplorerContext.Provider value={{
         blockNumber,
-        block
+        blockWithTransactions,
+        transactionReceipts
     }}>
       {children}
     </ExplorerContext.Provider>
