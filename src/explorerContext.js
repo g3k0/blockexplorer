@@ -3,6 +3,7 @@ import {
     getBlockNumberService,
     getBlockWithTransactionsService,
     getTransactionReceiptsService,
+    getGasPriceService,
   } from './services';
 
 const ExplorerContext = createContext();
@@ -11,6 +12,7 @@ const ExplorerProvider = ({ children }) => {
   const [blockNumber, setBlockNumber] = useState('');
   const [blockWithTransactions, setBlockWithTransactions] = useState('');
   const [transactionReceipts, setTransactionReceipts] = useState('');
+  const [gasPrice, setGasPrice] = useState('')
 
   useEffect(() => {
     async function getBlockNumber() {
@@ -31,13 +33,20 @@ const ExplorerProvider = ({ children }) => {
 
     getTransactionReceipts();
 
+    async function getGasPrice() {
+      setGasPrice(await getGasPriceService());
+    }
+
+    getGasPrice()
+
   }, [blockWithTransactions.hash]);
 
   return (
     <ExplorerContext.Provider value={{
         blockNumber,
         blockWithTransactions,
-        transactionReceipts
+        transactionReceipts,
+        gasPrice,
     }}>
       {children}
     </ExplorerContext.Provider>
