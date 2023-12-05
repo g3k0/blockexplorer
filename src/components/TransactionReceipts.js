@@ -26,8 +26,8 @@ function TransactionReceipts() {
     */
 
     return (
-        <div>
-            ciccio miccio
+        <div className="transaction-receipts">
+            Transaction Recepits
         </div>
     )
 }

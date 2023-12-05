@@ -6,8 +6,14 @@ function Head() {
 
 
     return (
-        <div>
-            <div>Latest Block number: {blockNumber}</div>
+        <div className="App-header">
+            <div>
+                <img className="App-logo" src="ethereum.webp" alt="ethereum"></img>
+                <h3 className="App-title">Ethereum Explorer</h3>
+                <p>
+                    Latest Block number: {blockNumber}
+                </p>
+            </div>
         </div>
     )
 }

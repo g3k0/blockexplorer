@@ -31,7 +31,7 @@ const ExplorerProvider = ({ children }) => {
 
     getTransactionReceipts();
 
-  });
+  }, [blockWithTransactions.hash]);
 
   return (
     <ExplorerContext.Provider value={{

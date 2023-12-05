@@ -5,7 +5,7 @@ function BlockWithTransactions(props) {
     const { blockWithTransactions } = useContext(ExplorerContext);
 
     return (
-        <div>
+        <div className="block-with-transactions">
             Latest Block data:
             <ul>
                 <li>Base fee per gas: {parseInt(blockWithTransactions.baseFeePerGas, 16)}</li>
