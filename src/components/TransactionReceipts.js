@@ -4,7 +4,7 @@ import { ExplorerContext } from '../explorerContext';
 function TransactionReceipts() {
     const { transactionReceipts } = useContext(ExplorerContext);
 
-    console.log(transactionReceipts)
+    // console.log(transactionReceipts)
 
    /**
     * [{
@@ -27,7 +27,7 @@ function TransactionReceipts() {
 
     return (
         <div className="transaction-receipts">
-            Transaction Recepits
+            <h3>Transaction Recepits</h3>
         </div>
     )
 }

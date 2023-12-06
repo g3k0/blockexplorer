@@ -1,17 +1,18 @@
 .App {
+  display: flex;
+  flex-direction: row;
 
-  .block-with-transactions {
-    float: left;
-    width: 50%;
+  .transaction-receipts, .block-with-transactions {
     padding: 10px;
     margin: 10px;
   }
 
-  .transaction-receipts {
-    float: left;
-    width: 50%;
-    padding: 10px;
-    margin: 10px;
+  .divider {
+    margin-bottom: 20px;
+  }
+
+  .datagrid {
+    height: auto;
   }
 
 }

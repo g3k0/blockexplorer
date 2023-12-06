@@ -13,8 +13,8 @@ function App() {
 
   return (
     <ExplorerProvider>
+      <Head></Head>
       <div className="App">
-        <Head></Head>
         <BlockWithTransactions></BlockWithTransactions>
         <TransactionReceipts></TransactionReceipts>
       </div>
