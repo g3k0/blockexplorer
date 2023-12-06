@@ -1,33 +1,69 @@
 import React, { useContext } from 'react';
 import { ExplorerContext } from '../explorerContext';
+import { DataGrid } from '@mui/x-data-grid';
 
 function TransactionReceipts() {
     const { transactionReceipts } = useContext(ExplorerContext);
 
-    // console.log(transactionReceipts)
 
-   /**
-    * [{
-    *   blockHash: "0x942d4e88d611d63a9c91751d5ef2e7463c6b80929bf3cf665d7fb64bd54cfeea"
-        blockNumber: "0x11db152"
-        contractAddress: null
-        cumulativeGasUsed: "0x23489"
-        effectiveGasPrice: "0x2dbe5f904a"
-        from: "0xb0ba33566bd35bcb80738810b2868dc1ddd1f0e9"
-        gasUsed: "0x23489"
-        logs: (3) [{…}, {…}, {…}]
-        logsBloom: "0x00000002000000000000000000000000000000000000000000000000000000000000000008000000000000000000004002000000080020000000000000000000000000000000000800000008000000000000000000000000000000000000000000000000000004000000100000080000000000000000000000000010000800000000000000000000000000000000000000000800000004000200004000000000000000000000000000000000a00000000000000000000000000000000000000000000002000000000000000000020000000000000000000000000400000000000000200000000000000000000000000000000000000000000000800000000000"
-        status: "0x1"
-        to: "0xe592427a0aece92de3edee1f18e0157c05861564"
-        transactionHash: "0x5b06be68d027aa39028a45f4f7ad15f7b951ffa7027a0dfa57c2d32a5632ed3a"
-        transactionIndex: "0x0"
-        type: "0x2"
-    * }]
-    */
+    const columns = [
+        { field: 'id', headerName: 'Id', width: 40 },
+        { field: 'blockHash', headerName: 'Block Hash', width: 80 },
+        { field: 'blockNumber', headerName: 'Block Number', width: 80 },
+        { field: 'contractAddress', headerName: 'Contract Address', width: 80 },
+        { field: 'cumulativeGasUsed', headerName: 'Cumulative Gas Used', width: 80 },
+        { field: 'effectiveGasPrice', headerName: 'Effective Gas Price', width: 80 },
+        { field: 'from', headerName: 'From', width: 80 },
+        { field: 'gasUsed', headerName: 'Gas Used', width: 80 },
+        { field: 'status', headerName: 'Status', width: 80 },
+        { field: 'to', headerName: 'To', width: 80 },
+        { field: 'transactionHash', headerName: 'Transaction Hash', width: 80 },
+        { field: 'transactionIndex', headerName: 'TransactionIndex', width: 80 },
+        { field: 'type', headerName: 'Type', width: 80 },
+    ];
+
+    let rows = [];
+    
+    if (transactionReceipts && transactionReceipts.receipts.length) {
+        rows = transactionReceipts.receipts.map((receipt, index) => {
+            return {
+                id: index,
+                blockHash: receipt.blockHash,
+                blockNumber: receipt.blockNumber,
+                contractAddress: receipt.contractAddress,
+                cumulativeGasUsed :receipt.cumulativeGasUsed,
+                effectiveGasPrice: receipt.effectiveGasPrice,
+                from: receipt.from,
+                gasUsed: receipt.gasUsed,
+                status: receipt.status,
+                to: receipt.to,
+                transactionHash: receipt.transactionHash,
+                transactionIndex: receipt.transactionIndex,
+                type: receipt.type,
+            }
+        });
+    }
 
     return (
         <div className="transaction-receipts">
             <h3>Transaction Recepits</h3>
+
+            {rows.length > 0 ? (
+                <DataGrid
+                    className="datagrid"
+                    rows={rows}
+                    columns={columns}
+                    initialState={{
+                    pagination: {
+                        paginationModel: { page: 0, pageSize: 10 },
+                    },
+                    }}
+                    pageSizeOptions={[5, 10]}
+                />
+                ) : (
+                <p>No transactions available</p>
+                )
+            }
         </div>
     )
 }

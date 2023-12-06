@@ -13,7 +13,7 @@ import TagIcon from '@mui/icons-material/Tag';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import ViewWeekIcon from '@mui/icons-material/ViewWeek';
 import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 
 function BlockWithTransactions(props) {
     const { blockWithTransactions } = useContext(ExplorerContext);
@@ -111,6 +111,8 @@ function BlockWithTransactions(props) {
 
             <Divider className="divider" />
 
+            <h4>Transactions</h4>
+
             {blockWithTransactions?.transactions?.length > 0 ? (
                 <DataGrid
                     className="datagrid"
@@ -125,7 +127,8 @@ function BlockWithTransactions(props) {
                 />
                 ) : (
                 <p>No transactions available</p>
-                )}
+                )
+            }
         </div>
     )
 
